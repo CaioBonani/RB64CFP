@@ -11,7 +11,9 @@ async fn main() {
 
             services::convert_base64::base64_create_file(base64_string, "teste").unwrap();
 
-            services::zip_base64::zip_file("./teste", "./teste.zip").unwrap();
+            let zip_bytes = services::zip_base64::zip_file("./teste").unwrap();
+
+            println!("{:?}", zip_bytes)
         }
         Err(e) => {
             eprintln!("Erro ao baixar imagem: {}", e);
