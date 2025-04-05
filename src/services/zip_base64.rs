@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{Cursor, Read, Write};
 use zip::{ZipWriter, write::FileOptions};
 
-pub fn zip_file(path: &str) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+pub fn zip_file(path: &str) -> Result<Vec<u8>, Box<dyn std::error::Error + Send + Sync>> {
     let file_name = std::path::Path::new(path)
         .file_name()
         .unwrap()

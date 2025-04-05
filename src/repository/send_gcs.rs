@@ -1,3 +1,4 @@
+use google_cloud_auth::credentials::CredentialsFile;
 use google_cloud_storage::client::{Client, ClientConfig};
 use google_cloud_storage::http::objects::upload::{UploadObjectRequest, UploadType};
 
@@ -8,7 +9,11 @@ pub async fn upload_to_gcs(
     content_type: UploadType,
 ) -> Result<String, Box<dyn std::error::Error>> {
     // lê as credenciais a partir da variável de ambiente
-    let config = ClientConfig::default().with_auth().await?;
+
+    let credentials = CredentialsFile::new_from_file("../../cred.json".to_owned()).await?;
+    let config = ClientConfig::default()
+        .with_credentials(credentials)
+        .await?;
     let client = Client::new(config);
 
     let req = UploadObjectRequest {
