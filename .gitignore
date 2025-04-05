@@ -21,3 +21,4 @@ target/
 /target
 /test_images
 cred.json
+.DS_Store
