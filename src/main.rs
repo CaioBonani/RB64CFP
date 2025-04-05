@@ -1,5 +1,8 @@
 mod handlers;
+mod repository;
 mod services;
+
+use google_cloud_storage::http::objects::upload::{Media, UploadType};
 
 #[tokio::main]
 async fn main() {
@@ -13,7 +16,24 @@ async fn main() {
 
             let zip_bytes = services::zip_base64::zip_file("./teste").unwrap();
 
-            println!("{:?}", zip_bytes)
+            let upload_type = UploadType::Simple(Media::new("imagesUMOV/teste.zip"));
+
+            match repository::send_gcs::upload_to_gcs(
+                "testerust",
+                "imagesUMOV/teste.zip",
+                zip_bytes,
+                upload_type,
+            )
+            .await
+            {
+                Ok(ok) => {
+                    println!("{}", ok);
+                }
+                Err(e) => {
+                    eprintln!("Erro: {}", e);
+                    return;
+                }
+            }
         }
         Err(e) => {
             eprintln!("Erro ao baixar imagem: {}", e);

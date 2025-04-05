@@ -11,3 +11,5 @@ hex = "0.4.3"
 base64 = "0.22.1"
 tokio = { version = "1", features = ["full"] }
 zip = "0.6"
+google-cloud-storage = { version = "0.24", features = ["rustls-tls"] }
+google-cloud-auth = { package = "gcloud-auth", version = "1.0.0" }
