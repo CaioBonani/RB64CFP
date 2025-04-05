@@ -1,0 +1,13 @@
+[package]
+name = "RB64CFP"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+cloud-storage = "0.11.1"
+reqwest = "0.12.15"
+hex = "0.4.3"
+base64 = "0.22.1"
+tokio = { version = "1", features = ["full"] }
+zip = "0.6"
