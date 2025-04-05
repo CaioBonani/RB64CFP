@@ -1,5 +1,3 @@
-use hex;
-
 use base64;
 
 pub fn bytes_to_base64(bytes: &[u8]) -> String {
